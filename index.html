@@ -4,53 +4,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A fully functional calculator with dark mode support">
-    <meta name="keywords" content="calculator, math, tools, dark mode, web calculator">
-    <meta name="author" content="Your Name">
-
-    <title>Advanced Web Calculator with Dark Mode</title>
-     <link rel="icon" type="image/x-icon" href="https://i.imghippo.com/files/QGAE1304ZU.png ">
-     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7867993252068161"
-     crossorigin="anonymous"></script>
+    <meta name="description" content="Free online scientific calculator with dark mode. Perform calculations, percentages, and more. Works on all devices.">
+    <meta name="keywords" content="calculator, scientific calculator, math tool, online calculator, dark mode calculator, mobile calculator">
+    <meta name="author" content="Calculator Pro">
+    <title>Scientific Calculator with Dark Mode | Free Online Math Tool</title>
+    <link rel="icon" type="image/x-icon" href="https://i.imghippo.com/files/QGAE1304ZU.png">
+    <meta name="theme-color" content="#0f0f0f">
+    <meta property="og:title" content="Scientific Calculator with Dark Mode">
+    <meta property="og:description" content="Free online scientific calculator that works on all devices">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourcalculatorwebsite.com">
+    <link rel="canonical" href="https://yourcalculatorwebsite.com">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7867993252068161" crossorigin="anonymous"></script>
     <style type="text/css">
+        /* CSS Variables for Theming */
+        :root {
+            --bg-color: #0f0f0f;
+            --text-color: white;
+            --calc-bg: #1a1a1a;
+            --display-bg: #2c2c2c;
+            --btn-bg: #2c2c2c;
+            --btn-color: #00ffcc;
+            --operator-color: #ffaa00;
+            --special-color: #8888ff;
+            --clear-bg: #ff3b3b;
+            --clear-hover: #ff6666;
+            --clear-active: white;
+            --equals-bg: #ffaa00;
+            --equals-hover: #ffcc66;
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            --border-radius: 12px;
+        }
+
+        .light-mode {
+            --bg-color: #f5f5f5;
+            --text-color: #333;
+            --calc-bg: #ffffff;
+            --display-bg: #f0f0f0;
+            --btn-bg: #f0f0f0;
+            --btn-color: #007acc;
+            --operator-color: #ff6600;
+            --special-color: #6666cc;
+            --clear-bg: #ff3b3b;
+            --clear-hover: #ff6666;
+            --clear-active: white;
+            --equals-bg: #ff6600;
+            --equals-hover: #ff9933;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
         /* General Page Styles */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
             gap: 20px;
             transition: all 0.3s ease;
-            background: #0f0f0f;
-            color: white;
+            background: var(--bg-color);
+            color: var(--text-color);
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        /* Ad Container Styles */
+        .ad-container {
+            width: 100%;
+            max-width: 728px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .ad-container.top {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 30%;
+            height: auto;
+            min-height: 100px;
+            z-index: 100;
+            background: var(--bg-color);
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-right: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .light-mode .ad-container.top {
+            border-right: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .ad-container.bottom {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            z-index: 100;
+            background: var(--bg-color);
+            padding: 10px 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .light-mode .ad-container.bottom {
+            border-top: 1px solid rgba(0,0,0,0.1);
         }
 
         /* Calculator Wrapper */
         #calc {
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            border-radius: 15px;
+            box-shadow: var(--shadow);
+            border-radius: var(--border-radius);
             padding: 25px;
-            width: 387px;
+            width: 100%;
+            max-width: 387px;
             transition: all 0.3s ease;
-            background: black;
+            background: var(--calc-bg);
+            margin: 20px 0;
+            z-index: 10;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .light-mode #calc {
+            border: 1px solid rgba(0,0,0,0.05);
         }
 
         /* Calculator Display */
         #res {
             width: calc(100% - 20px);
             height: 60px;
-            border-radius: 12px;
+            border-radius: var(--border-radius);
             font-size: 2rem;
             padding: 10px;
             border: none;
             text-align: right;
             margin-bottom: 20px;
             transition: all 0.3s ease;
-            background: #2c2c2c;
-            color: white;
+            background: var(--display-bg);
+            color: var(--text-color);
+            font-weight: 300;
+            caret-color: transparent;
         }
 
         /* Button Container */
@@ -62,7 +157,7 @@
 
         /* Buttons General Style */
         .btn input[type="button"] {
-            padding: 20px;
+            padding: 15px 0;
             font-size: 1.1rem;
             border: none;
             border-radius: 50px;
@@ -70,8 +165,10 @@
             box-shadow: 2px 4px 7px rgba(0, 0, 0, 0.1);
             transition: all 0.2s ease;
             aspect-ratio: 1/1;
-            background: #2c2c2c;
-            color: #00ffcc;
+            background: var(--btn-bg);
+            color: var(--btn-color);
+            font-weight: 500;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .btn input[type="button"]:hover {
@@ -84,56 +181,56 @@
         }
 
         .btn input[type="button"]:focus {
-            outline: 2px solid #00ffcc;
+            outline: 2px solid var(--btn-color);
         }
 
         /* Clear Button */
         #clear {
-            background: #ff3b3b;
+            background: var(--clear-bg);
             color: white;
         }
 
         #clear:hover {
-            background: #ff6666;
+            background: var(--clear-hover);
         }
 
         #clear:active {
-            background: white;
-            color: #ff3b3b;
+            background: var(--clear-active);
+            color: var(--clear-bg);
         }
 
         /* Backspace and All-Clear Buttons */
         #backspace,
         #all-clear {
-            background: #ffaa00;
+            background: var(--operator-color);
             color: white;
         }
 
         #backspace:hover,
         #all-clear:hover {
-            background: #ffcc66;
+            opacity: 0.9;
         }
 
         #backspace:active, 
         #all-clear:active {
             background: white;
-            color: #ffaa00;
+            color: var(--operator-color);
         }
 
         /* Equal Button */
         input[type="button"][value="="] {
-            background: #ffaa00;
+            background: var(--equals-bg);
             color: white;
             grid-column: span 1;
         }
 
         input[type="button"][value="="]:hover {
-            background-color: #ffcc66;
+            background-color: var(--equals-hover);
         }
 
         input[type="button"][value="="]:active {
             background-color: white;
-            color: black;
+            color: var(--equals-bg);
         }
 
         /* Operator Buttons */
@@ -143,7 +240,7 @@
         input[type="button"][value="/"],
         input[type="button"][value="("],
         input[type="button"][value=")"] {
-            color: #ffaa00;
+            color: var(--operator-color);
         }
 
         /* Special Buttons */
@@ -152,19 +249,21 @@
         input[type="button"][value="000"],
         input[type="button"][value="00"],
         input[type="button"][value="10"] {
-            color: #8888ff;
+            color: var(--special-color);
         }
 
         /* Dark Mode Toggle Button */
         #theme-toggle {
-            padding: 10px 20px;
-            background: #2c2c2c;
-            color: #00ffcc;
+            padding: 12px 24px;
+            background: var(--btn-bg);
+            color: var(--btn-color);
             border: none;
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-weight: bold;
+            font-weight: 600;
+            margin-top: 20px;
+            box-shadow: var(--shadow);
         }
 
         #theme-toggle:hover {
@@ -172,40 +271,15 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        /* Light Mode Styles */
-        body.light-mode {
-            background: #f0f0f0;
-            color: black;
-        }
-
-        body.light-mode #calc {
-            background: #ffffff;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        body.light-mode #res {
-            background: #f5f5f5;
-            color: black;
-        }
-
-        body.light-mode .btn input[type="button"] {
-            background: #f5f5f5;
-            color: #007acc;
-            box-shadow: 2px 4px 7px rgba(0, 0, 0, 0.05);
-        }
-
-        body.light-mode input[type="button"][value="+"],
-        body.light-mode input[type="button"][value="-"],
-        body.light-mode input[type="button"][value="x"],
-        body.light-mode input[type="button"][value="/"],
-        body.light-mode input[type="button"][value="("],
-        body.light-mode input[type="button"][value=")"] {
-            color: #ff6600;
-        }
-
-        body.light-mode #theme-toggle {
-            background: #007acc;
-            color: white;
+        /* History Display */
+        #history {
+            height: 30px;
+            color: var(--text-color);
+            text-align: right;
+            margin-bottom: 5px;
+            opacity: 0.7;
+            font-size: 0.9rem;
+            font-weight: 300;
         }
 
         /* Accessibility Improvements */
@@ -220,24 +294,98 @@
             white-space: nowrap;
             border-width: 0;
         }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .ad-container.top {
+                position: static;
+                width: 100%;
+                height: auto;
+                min-height: 50px;
+                border-right: none;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+                padding: 5px 0;
+            }
+            
+            .light-mode .ad-container.top {
+                border-bottom: 1px solid rgba(0,0,0,0.1);
+            }
+            
+            #calc {
+                padding: 20px;
+                margin: 10px 0;
+            }
+            
+            .btn input[type="button"] {
+                padding: 12px 0;
+                font-size: 1rem;
+            }
+            
+            #res {
+                height: 50px;
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+                gap: 15px;
+            }
+            
+            #calc {
+                padding: 15px;
+            }
+            
+            .btn {
+                gap: 8px;
+            }
+            
+            .btn input[type="button"] {
+                padding: 10px 0;
+                font-size: 0.9rem;
+            }
+            
+            #res {
+                height: 45px;
+                font-size: 1.5rem;
+                margin-bottom: 15px;
+            }
+            
+            #theme-toggle {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
     </style>
 </head>
 
 <body>
-    <header>
-        <h1 class="sr-only">Web Calculator</h1>
-    </header>
+    <div class="ad-container top">
+        <!-- Top Ad -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-7867993252068161"
+             data-ad-slot="1234567890"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+    </div>
     
+    <header>
+        <h1 class="sr-only">Scientific Calculator with Dark Mode</h1>
+    </header>
+
     <main>
         <div id="calc" aria-label="Calculator">
             <div id="content">
                 <form>
                     <div id="output">
+                        <div id="history"></div>
                         <input type="text" id="res" aria-label="Calculator display" readonly>
                     </div>
                     <div class="btn">
                         <input type="button" value="C" onclick="Clear()" id="clear" aria-label="Clear">
-                        <input type="button" value="AC" onclick="Back()" id="all-clear" aria-label="All Clear">
+                        <input type="button" value="AC" onclick="AllClear()" id="all-clear" aria-label="All Clear">
                         <input type="button" value="←" onclick="Back()" id="backspace" aria-label="Backspace">
                         <input type="button" value="(" onclick="Solve('(')" aria-label="Open parenthesis">
                         <input type="button" value=")" onclick="Solve(')')" aria-label="Close parenthesis">
@@ -252,7 +400,7 @@
                         <input type="button" value="5" onclick="Solve('5')" aria-label="Five">
                         <input type="button" value="6" onclick="Solve('6')" aria-label="Six">
                         <input type="button" value="-" onclick="Solve('-')" aria-label="Subtract">
-                        <input type="button" value="%" onclick="Solve('/100')" aria-label="Percentage">
+                        <input type="button" value="%" onclick="percentage()" aria-label="Percentage">
                         
                         <input type="button" value="1" onclick="Solve('1')" aria-label="One">
                         <input type="button" value="2" onclick="Solve('2')" aria-label="Two">
@@ -274,10 +422,44 @@
     <footer>
         <button id="theme-toggle" aria-label="Toggle dark mode">Light Mode</button>
     </footer>
-    
+   
+    <div class="ad-container bottom">
+        <!-- Bottom Ad -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-7867993252068161"
+             data-ad-slot="0987654321"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+    </div>
+
     <script>
+        // Initialize ads
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        
         // Calculator functionality
         let output = document.getElementById('res');
+        let history = document.getElementById('history');
+        let lastCalculation = '';
+        
+        // Safe evaluation function
+        function safeEval(expr) {
+            try {
+                // Remove any characters that aren't numbers, operators, or parentheses
+                expr = expr.replace(/[^0-9+\-*/().%]/g, '');
+                
+                // Handle percentage calculations
+                expr = expr.replace(/([0-9.]+)%/g, '($1/100)*');
+                
+                // Replace 'x' with '*' for proper evaluation
+                expr = expr.replace(/x/g, '*');
+                
+                // Use Function constructor instead of eval
+                return new Function('return ' + expr)();
+            } catch (e) {
+                return 'Error';
+            }
+        }
         
         // Handle keyboard input
         document.addEventListener('keydown', function(event) {
@@ -289,7 +471,7 @@
                 event.preventDefault();
             }
             // Handle Enter key as equals
-            else if (key === 'Enter') {
+            else if (key === 'Enter' || key === '=') {
                 Result();
                 event.preventDefault();
             }
@@ -306,20 +488,33 @@
         });
         
         function Solve(val) {
+            // Prevent multiple decimal points in a number
+            if (val === '.') {
+                const currentValue = output.value;
+                const parts = currentValue.split(/[\+\-\*\/]/);
+                const lastPart = parts[parts.length - 1];
+                
+                if (lastPart.includes('.')) {
+                    return; // Don't add another decimal point
+                }
+            }
+            
             output.value += val;
             output.focus();
         }
         
         function Result() {
-            try {
-                // Replace 'x' with '*' for proper evaluation
-                let expression = output.value.replace(/x/g, '*');
-                // Handle percentage calculations
-                expression = expression.replace(/([0-9.]+)%/g, '($1/100)');
-                output.value = eval(expression);
-            } catch (e) {
-                alert('Invalid calculation');
-                Clear();
+            if (output.value === '') return;
+            
+            lastCalculation = output.value;
+            const result = safeEval(output.value);
+            
+            if (result === 'Error') {
+                output.value = 'Error';
+                setTimeout(Clear, 1000);
+            } else {
+                history.textContent = output.value + ' =';
+                output.value = result;
             }
             output.focus();
         }
@@ -329,8 +524,26 @@
             output.focus();
         }
         
+        function AllClear() {
+            output.value = '';
+            history.textContent = '';
+            output.focus();
+        }
+        
         function Back() {
             output.value = output.value.slice(0, -1);
+            output.focus();
+        }
+        
+        function percentage() {
+            const currentValue = output.value;
+            const parts = currentValue.split(/[\+\-\*\/]/);
+            const lastNumber = parts[parts.length - 1];
+            
+            if (lastNumber) {
+                const percentageValue = parseFloat(lastNumber) / 100;
+                output.value = currentValue.slice(0, -lastNumber.length) + percentageValue;
+            }
             output.focus();
         }
         
