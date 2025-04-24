@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A fully functional calculator with dark mode support">
+    <meta name="keywords" content="calculator, math, tools, dark mode, web calculator">
+    <meta name="author" content="Your Name">
+
+    <title>Advanced Web Calculator with Dark Mode</title>
+     <link rel="icon" type="image/x-icon" href="https://i.imghippo.com/files/QGAE1304ZU.png ">
+    <style type="text/css">
+        /* General Page Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            gap: 20px;
+            transition: all 0.3s ease;
+            background: #0f0f0f;
+            color: white;
+        }
+
+        /* Calculator Wrapper */
+        #calc {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            padding: 25px;
+            width: 387px;
+            transition: all 0.3s ease;
+            background: black;
+        }
+
+        /* Calculator Display */
+        #res {
+            width: calc(100% - 20px);
+            height: 60px;
+            border-radius: 12px;
+            font-size: 2rem;
+            padding: 10px;
+            border: none;
+            text-align: right;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            background: #2c2c2c;
+            color: white;
+        }
+
+        /* Button Container */
+        .btn {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+        }
+
+        /* Buttons General Style */
+        .btn input[type="button"] {
+            padding: 20px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 2px 4px 7px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+            aspect-ratio: 1/1;
+            background: #2c2c2c;
+            color: #00ffcc;
+        }
+
+        .btn input[type="button"]:hover {
+            box-shadow: none;
+            transform: translateY(-2px);
+        }
+
+        .btn input[type="button"]:active {
+            transform: scale(0.95);
+        }
+
+        .btn input[type="button"]:focus {
+            outline: 2px solid #00ffcc;
+        }
+
+        /* Clear Button */
+        #clear {
+            background: #ff3b3b;
+            color: white;
+        }
+
+        #clear:hover {
+            background: #ff6666;
+        }
+
+        #clear:active {
+            background: white;
+            color: #ff3b3b;
+        }
+
+        /* Backspace and All-Clear Buttons */
+        #backspace,
+        #all-clear {
+            background: #ffaa00;
+            color: white;
+        }
+
+        #backspace:hover,
+        #all-clear:hover {
+            background: #ffcc66;
+        }
+
+        #backspace:active, 
+        #all-clear:active {
+            background: white;
+            color: #ffaa00;
+        }
+
+        /* Equal Button */
+        input[type="button"][value="="] {
+            background: #ffaa00;
+            color: white;
+            grid-column: span 1;
+        }
+
+        input[type="button"][value="="]:hover {
+            background-color: #ffcc66;
+        }
+
+        input[type="button"][value="="]:active {
+            background-color: white;
+            color: black;
+        }
+
+        /* Operator Buttons */
+        input[type="button"][value="+"],
+        input[type="button"][value="-"],
+        input[type="button"][value="x"],
+        input[type="button"][value="/"],
+        input[type="button"][value="("],
+        input[type="button"][value=")"] {
+            color: #ffaa00;
+        }
+
+        /* Special Buttons */
+        input[type="button"][value="%"],
+        input[type="button"][value="."],
+        input[type="button"][value="000"],
+        input[type="button"][value="00"],
+        input[type="button"][value="10"] {
+            color: #8888ff;
+        }
+
+        /* Dark Mode Toggle Button */
+        #theme-toggle {
+            padding: 10px 20px;
+            background: #2c2c2c;
+            color: #00ffcc;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        #theme-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Light Mode Styles */
+        body.light-mode {
+            background: #f0f0f0;
+            color: black;
+        }
+
+        body.light-mode #calc {
+            background: #ffffff;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        body.light-mode #res {
+            background: #f5f5f5;
+            color: black;
+        }
+
+        body.light-mode .btn input[type="button"] {
+            background: #f5f5f5;
+            color: #007acc;
+            box-shadow: 2px 4px 7px rgba(0, 0, 0, 0.05);
+        }
+
+        body.light-mode input[type="button"][value="+"],
+        body.light-mode input[type="button"][value="-"],
+        body.light-mode input[type="button"][value="x"],
+        body.light-mode input[type="button"][value="/"],
+        body.light-mode input[type="button"][value="("],
+        body.light-mode input[type="button"][value=")"] {
+            color: #ff6600;
+        }
+
+        body.light-mode #theme-toggle {
+            background: #007acc;
+            color: white;
+        }
+
+        /* Accessibility Improvements */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1 class="sr-only">Web Calculator</h1>
+    </header>
+    
+    <main>
+        <div id="calc" aria-label="Calculator">
+            <div id="content">
+                <form>
+                    <div id="output">
+                        <input type="text" id="res" aria-label="Calculator display" readonly>
+                    </div>
+                    <div class="btn">
+                        <input type="button" value="C" onclick="Clear()" id="clear" aria-label="Clear">
+                        <input type="button" value="AC" onclick="Back()" id="all-clear" aria-label="All Clear">
+                        <input type="button" value="←" onclick="Back()" id="backspace" aria-label="Backspace">
+                        <input type="button" value="(" onclick="Solve('(')" aria-label="Open parenthesis">
+                        <input type="button" value=")" onclick="Solve(')')" aria-label="Close parenthesis">
+                        
+                        <input type="button" value="7" onclick="Solve('7')" aria-label="Seven">
+                        <input type="button" value="8" onclick="Solve('8')" aria-label="Eight">
+                        <input type="button" value="9" onclick="Solve('9')" aria-label="Nine">
+                        <input type="button" value="x" onclick="Solve('*')" aria-label="Multiply">
+                        <input type="button" value="/" onclick="Solve('/')" aria-label="Divide">
+                        
+                        <input type="button" value="4" onclick="Solve('4')" aria-label="Four">
+                        <input type="button" value="5" onclick="Solve('5')" aria-label="Five">
+                        <input type="button" value="6" onclick="Solve('6')" aria-label="Six">
+                        <input type="button" value="-" onclick="Solve('-')" aria-label="Subtract">
+                        <input type="button" value="%" onclick="Solve('/100')" aria-label="Percentage">
+                        
+                        <input type="button" value="1" onclick="Solve('1')" aria-label="One">
+                        <input type="button" value="2" onclick="Solve('2')" aria-label="Two">
+                        <input type="button" value="3" onclick="Solve('3')" aria-label="Three">
+                        <input type="button" value="+" onclick="Solve('+')" aria-label="Add">
+                        <input type="button" value="." onclick="Solve('.')" aria-label="Decimal point">
+                        
+                        <input type="button" value="10" onclick="Solve('10')" aria-label="Ten">
+                        <input type="button" value="000" onclick="Solve('000')" aria-label="Triple zero">
+                        <input type="button" value="00" onclick="Solve('00')" aria-label="Double zero">
+                        <input type="button" value="0" onclick="Solve('0')" aria-label="Zero">
+                        <input type="button" value="=" onclick="Result()" id="equals" aria-label="Equals">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <button id="theme-toggle" aria-label="Toggle dark mode">Light Mode</button>
+    </footer>
+    
+    <script>
+        // Calculator functionality
+        let output = document.getElementById('res');
+        
+        // Handle keyboard input
+        document.addEventListener('keydown', function(event) {
+            const key = event.key;
+            
+            // Allow numbers and operators
+            if (/[0-9+\-*/.%()]/.test(key)) {
+                Solve(key);
+                event.preventDefault();
+            }
+            // Handle Enter key as equals
+            else if (key === 'Enter') {
+                Result();
+                event.preventDefault();
+            }
+            // Handle Backspace
+            else if (key === 'Backspace') {
+                Back();
+                event.preventDefault();
+            }
+            // Handle Escape as clear
+            else if (key === 'Escape') {
+                Clear();
+                event.preventDefault();
+            }
+        });
+        
+        function Solve(val) {
+            output.value += val;
+            output.focus();
+        }
+        
+        function Result() {
+            try {
+                // Replace 'x' with '*' for proper evaluation
+                let expression = output.value.replace(/x/g, '*');
+                // Handle percentage calculations
+                expression = expression.replace(/([0-9.]+)%/g, '($1/100)');
+                output.value = eval(expression);
+            } catch (e) {
+                alert('Invalid calculation');
+                Clear();
+            }
+            output.focus();
+        }
+        
+        function Clear() {
+            output.value = '';
+            output.focus();
+        }
+        
+        function Back() {
+            output.value = output.value.slice(0, -1);
+            output.focus();
+        }
+        
+        // Dark Mode Toggle
+        const darkModeToggle = document.getElementById('theme-toggle');
+        let isDarkMode = true; // Default is dark mode
+        
+        // Check for saved preference
+        if (localStorage.getItem('darkMode') === 'false') {
+            isDarkMode = false;
+            updateTheme();
+        }
+        
+        darkModeToggle.addEventListener('click', () => {
+            isDarkMode = !isDarkMode;
+            localStorage.setItem('darkMode', isDarkMode);
+            updateTheme();
+        });
+        
+        function updateTheme() {
+            if (isDarkMode) {
+                document.body.classList.remove('light-mode');
+                darkModeToggle.textContent = 'Light Mode';
+                darkModeToggle.setAttribute('aria-label', 'Switch to light mode');
+            } else {
+                document.body.classList.add('light-mode');
+                darkModeToggle.textContent = 'Dark Mode';
+                darkModeToggle.setAttribute('aria-label', 'Switch to dark mode');
+            }
+        }
+        
+        // Initialize
+        updateTheme();
+        output.focus();
+    </script>
+</body>
+
+</html>
